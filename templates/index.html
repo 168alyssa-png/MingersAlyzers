@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local AI Chat</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Marked.js for safe and easy Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div id="app-wrapper">
+        <header class="app-header">
+            <span class="brand-label">LOCAL AI</span>
+            <h1>Chat with Qwen</h1>
+            <p class="app-subtitle">A private conversation with your local Ollama model.</p>
+        </header>
+
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="chat-tab">Chat</button>
+            <button class="tab-btn" data-tab="docs-tab">Document Collection</button>
+        </nav>
+
+        <div id="tab-content">
+            <!-- Chat Tab -->
+            <div id="chat-tab" class="tab-panel active">
+                <div id="chat-container">
+                    <div id="chat-window"></div>
+                    <div id="chat-controls">
+                        <label class="search-toggle">
+                            <input type="checkbox" id="web-search-checkbox">
+                            <span class="slider"></span>
+                            <span class="label-text">Search Web</span>
+                        </label>
+                    </div>
+                    <form id="chat-form">
+                        <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" required>
+                        <button type="submit" id="send-btn">Send</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Documents Tab -->
+            <div id="docs-tab" class="tab-panel">
+                <div id="docs-container">
+                    <div class="docs-header">
+                        <h2>Local Documents</h2>
+                        <p>Upload documents to give the AI more context. Supported: PDF, DOCX, TXT, MD.</p>
+                    </div>
+                    
+                    <div id="upload-area">
+                        <div id="drop-zone">
+                            <p>Drag & Drop files here</p>
+                            <span>or</span>
+                            <button id="browse-btn">Browse Files</button>
+                            <input type="file" id="file-input" multiple style="display: none;">
+                        </div>
+                    </div>
+
+                    <div id="docs-list-container">
+                        <div id="empty-state">No documents uploaded yet.</div>
+                        <table id="docs-table" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Size</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="docs-list"></tbody>
+                        </table>
+                    </div>
+                    <div id="upload-feedback"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/chat.js"></script>
+    <script src="/static/docs.js"></script>
+    <script>
+        // Tab Switching Logic
+        const tabs = document.querySelectorAll('.tab-btn');
+        const panels = document.querySelectorAll('.tab-panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.tab;
+                
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                panels.forEach(p => {
+                    p.classList.remove('active');
+                    if (p.id === target) p.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

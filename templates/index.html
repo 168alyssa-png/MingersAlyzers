@@ -3,28 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Local AI Chat</title>
+    <title>CookieLab | AI Recipe Assistant</title>
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/cookie-theme.css">
     <!-- Marked.js for safe and easy Markdown rendering -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <div id="app-wrapper">
         <header class="app-header">
-            <span class="brand-label">LOCAL AI</span>
-            <h1>Chat with Qwen</h1>
-            <p class="app-subtitle">A private conversation with your local Ollama model.</p>
+            <span class="brand-label">✦ YOUR LOCAL BAKING AI</span>
+            <h1>CookieLab: Your AI Baking Buddy</h1>
+            <p class="app-subtitle">From crispy edges to chewy centres — explore sweet ideas with Qwen and your favourite recipes.</p>
         </header>
 
         <nav class="tab-nav">
-            <button class="tab-btn active" data-tab="chat-tab">Chat</button>
-            <button class="tab-btn" data-tab="docs-tab">Document Collection</button>
+            <button class="tab-btn active" data-tab="chat-tab">🍪 Recipe Chat</button>
+            <button class="tab-btn" data-tab="docs-tab">📚 Recipe Library</button>
         </nav>
 
         <div id="tab-content">
             <!-- Chat Tab -->
             <div id="chat-tab" class="tab-panel active">
                 <div id="chat-container">
+                    <div class="chat-intro" aria-label="CookieLab baking assistant">
+                        <span class="chat-intro-icon" aria-hidden="true">👩‍🍳</span>
+                        <div class="chat-intro-text"><strong>Let's bake something wonderful!</strong><span>Ask about ingredients, texture, sweetness or recipe changes.</span></div>
+                    </div>
                     <div id="chat-window"></div>
                     <div id="chat-controls">
                         <label class="search-toggle">
@@ -34,8 +39,8 @@
                         </label>
                     </div>
                     <form id="chat-form">
-                        <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" required>
-                        <button type="submit" id="send-btn">Send</button>
+                        <input type="text" id="user-input" placeholder="Ask for chewier cookies, less sugar, baking tips..." autocomplete="off" required>
+                        <button type="submit" id="send-btn">Ask Qwen</button>
                     </form>
                 </div>
             </div>
@@ -44,15 +49,15 @@
             <div id="docs-tab" class="tab-panel">
                 <div id="docs-container">
                     <div class="docs-header">
-                        <h2>Local Documents</h2>
-                        <p>Upload documents to give the AI more context. Supported: PDF, DOCX, TXT, MD.</p>
+                        <h2>Your Recipe Library</h2>
+                        <p>Upload your favourite recipes and baking guides to help Qwen make better suggestions. Supports PDF, DOCX, TXT and MD.</p>
                     </div>
                     
                     <div id="upload-area">
                         <div id="drop-zone">
-                            <p>Drag & Drop files here</p>
+                            <p>Drop your recipe files here</p>
                             <span>or</span>
-                            <button id="browse-btn">Browse Files</button>
+                            <button id="browse-btn">Choose Files</button>
                             <input type="file" id="file-input" multiple style="display: none;">
                         </div>
                     </div>

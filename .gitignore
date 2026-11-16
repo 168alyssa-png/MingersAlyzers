@@ -30,3 +30,4 @@ document_index/
 
 # Mac files
 .DS_Store
+.cookie-theme-backups/

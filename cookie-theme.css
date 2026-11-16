@@ -1,0 +1,334 @@
+/* CookieLab visual theme — loaded AFTER existing style.css.
+   Intentionally CSS-only: keeps Flask, Ollama, RAG and all existing JS behaviors. */
+:root {
+  --cookie-cream: #fff8ed;
+  --cookie-bg: #f8ecde;
+  --cookie-paper: #fffdfa;
+  --cookie-ink: #573629;
+  --cookie-brown: #714336;
+  --cookie-muted: #896f63;
+  --cookie-caramel: #dba064;
+  --cookie-strawberry: #c66f78;
+  --cookie-strawberry-dark: #a95260;
+  --cookie-peach: #fff0de;
+  --cookie-line: #eed9c8;
+  --cookie-mint: #eef3df;
+  --cookie-shadow: 0 18px 50px rgba(93, 56, 38, .11);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 34px 24px 64px;
+  background-color: var(--cookie-bg);
+  background-image:
+    radial-gradient(circle at 6% 8%, rgba(255,255,255,.7) 0 8px, transparent 9px),
+    radial-gradient(circle at 90% 17%, rgba(210,155,120,.12) 0 7px, transparent 8px),
+    radial-gradient(circle at 22% 80%, rgba(218,154,119,.13) 0 5px, transparent 6px),
+    linear-gradient(135deg, #fbf1e6 0%, #f7e9d9 55%, #fff4e8 100%);
+  font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Trebuchet MS", sans-serif;
+  color: var(--cookie-ink);
+}
+button, input { font-family: inherit; }
+button { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 3px solid #dfb05e; outline-offset: 3px;
+}
+#app-wrapper {
+  width: 100%;
+  max-width: 1060px;
+  gap: 19px;
+  position: relative;
+}
+.app-header {
+  box-sizing: border-box;
+  text-align: left;
+  position: relative;
+  isolation: isolate;
+  min-height: 248px;
+  padding: 42px 265px 36px 52px;
+  margin: 0;
+  border: 2px solid #e7cfb8;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 4% 6%, #fff7e9 0 22px, transparent 23px),
+    linear-gradient(115deg, #fffdfa 0%, #fff1df 63%, #f9dec9 100%);
+  box-shadow: var(--cookie-shadow);
+  overflow: hidden;
+}
+.app-header::before {
+  content: "✦";
+  position: absolute;
+  z-index: -1;
+  top: 18px;
+  right: 212px;
+  font-size: 52px;
+  line-height: 1;
+  color: #eebc6b;
+  transform: rotate(18deg);
+}
+/* The chef mascot from your Canva-inspired cookie stickers. */
+.app-header::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 16px;
+  right: 31px;
+  width: 220px;
+  height: 226px;
+  background: url('/static/cookie-mascot.png') center / contain no-repeat;
+  transform: rotate(-4deg);
+}
+.brand-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border: 1px solid #efd3bb;
+  border-radius: 999px;
+  background: #fae6da;
+  color: #a45d5f;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+}
+.app-header h1 {
+  margin: 17px 0 9px;
+  color: #62382f;
+  font: 800 clamp(2rem, 4.5vw, 3.35rem)/1.05 "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+.app-subtitle {
+  max-width: 590px;
+  font-size: 1.04rem;
+  line-height: 1.6;
+  color: #8b6b58;
+}
+.tab-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 0;
+}
+.tab-btn {
+  background: #fff8f0;
+  border: 1.5px solid #e9d1bd;
+  color: #6c4a3b;
+  padding: 13px 23px;
+  border-radius: 999px;
+  font-size: .95rem;
+  font-weight: 800;
+  box-shadow: 0 3px 10px rgba(104,55,34,.04);
+  transition: transform .18s, background .18s, box-shadow .18s;
+}
+.tab-btn:hover { transform: translateY(-2px); background: #fff; }
+.tab-btn.active {
+  background: #b56b6f;
+  border-color: #ab5b64;
+  box-shadow: 0 6px 0 #e3c0b1, 0 14px 20px rgba(142,76,62,.12);
+  color: white;
+}
+.tab-btn.active:hover { background: #a85964; }
+#chat-container, #docs-container {
+  border-radius: 30px;
+  border: 2px solid #e9d3bf;
+  background: #fffdfa;
+  box-shadow: var(--cookie-shadow);
+  overflow: hidden;
+}
+#chat-container { height: 620px; }
+.chat-intro {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 30px 17px;
+  border-bottom: 1px dashed #e9cfbd;
+  background: #fff8ef;
+}
+.chat-intro-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 52px;
+  width: 52px; height: 52px;
+  border-radius: 17px;
+  background: #f8dcc3;
+  font-size: 27px;
+  box-shadow: inset 0 -4px 0 rgba(144,92,51,.07);
+}
+.chat-intro-text { display: flex; flex-direction: column; gap: 2px; }
+.chat-intro-text strong {
+  color: var(--cookie-brown);
+  font: 800 1.07rem "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
+}
+.chat-intro-text span { font-size: .84rem; line-height: 1.3; color: var(--cookie-muted); }
+#chat-window {
+  padding: 25px 30px 18px;
+  gap: 16px;
+  background: linear-gradient(#fffcf7, #fffdfb);
+  scrollbar-color: #e5c2ac transparent;
+  scrollbar-width: thin;
+}
+#chat-window:empty::before {
+  content: "🍪  Ready for a sweet idea?\A\A Ask for chewy centres, crispy edges, less sugar, or ingredient swaps.";
+  display: block;
+  white-space: pre-line;
+  align-self: center;
+  margin: auto 12px;
+  padding: 28px 32px;
+  max-width: 470px;
+  background: #fff2e4;
+  border: 1px dashed #e9c6a6;
+  border-radius: 24px;
+  color: #8b6254;
+  font-size: 1.08rem;
+  line-height: 1.6;
+  text-align: center;
+}
+.message {
+  max-width: 84%;
+  font-size: .96rem;
+  line-height: 1.65;
+  padding: 16px 19px;
+  border-radius: 21px;
+  overflow-wrap: anywhere;
+  box-shadow: 0 4px 12px rgba(105,70,50,.05);
+}
+.message.user {
+  background: #b96e73;
+  color: #fff;
+  border-bottom-right-radius: 7px;
+  border: 1px solid #af6870;
+}
+.message.assistant {
+  background: #fff0df;
+  color: #543a2f;
+  border: 1px solid #f0d4b8;
+  border-bottom-left-radius: 7px;
+}
+.message.assistant a, #docs-table a { color: #8b4b62; text-decoration: underline; text-underline-offset: 3px; font-weight: 650; }
+.message.assistant a:hover, #docs-table a:hover { color: #a74c60; }
+.message p { margin: 0 0 .72em; }
+.message p:last-child { margin-bottom: 0; }
+.message ul, .message ol { margin: 8px 0 8px; padding-left: 24px; }
+.message h1, .message h2, .message h3 { color: #693c31; margin: .75em 0 .35em; line-height: 1.25; }
+.message strong { font-weight: 780; }
+.message.error { background: #fff0ee; color: #a83736; border-color: #efb0a8; }
+#chat-controls {
+  padding: 7px 24px 9px;
+  background: #fffdfa;
+  border-top: 1px solid #f1e6db;
+}
+.search-toggle { color: #7a6056; font-weight: 650; gap: 9px; }
+.search-toggle input { accent-color: #be7780; width: 17px; height: 17px; }
+#chat-form {
+  padding: 16px 23px 20px;
+  border-top: 1px solid #f1e6db;
+  gap: 12px;
+  background: #fffdfa;
+}
+#user-input {
+  min-width: 0;
+  padding: 15px 19px;
+  border: 1.5px solid #e4c8b4;
+  border-radius: 15px;
+  background: #fffaf4;
+  color: #5b4034;
+  font-size: .96rem;
+}
+#user-input::placeholder { color: #ab9488; }
+#user-input:focus { border-color: #bf7880; box-shadow: 0 0 0 4px #f5e1de; }
+#send-btn {
+  border-radius: 15px;
+  background: #bc7275;
+  color: white;
+  font-weight: 800;
+  padding: 12px 24px;
+  box-shadow: 0 4px 0 #a85965;
+}
+#send-btn:hover { background: #a85a65; }
+#send-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #a85965; }
+#docs-container { padding: 34px 37px 38px; }
+.docs-header { margin-bottom: 26px; }
+.docs-header h2 {
+  color: #6e4234;
+  font: 800 1.7rem "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
+  margin-bottom: 9px;
+}
+.docs-header p { color: #8b7366; max-width: 650px; margin: auto; line-height: 1.55; }
+#upload-area { margin-bottom: 24px; }
+#drop-zone {
+  background: #fff5e8;
+  border: 2px dashed #d9ac8b;
+  border-radius: 23px;
+  padding: 38px 20px;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+#drop-zone::before {
+  content: "🍪  📄";
+  display: block;
+  font-size: 30px;
+  margin: 0 0 10px;
+}
+#drop-zone.dragover { background: #fae4d4; border-color: #bc7275; transform: scale(1.008); }
+#drop-zone p { color: #744937; font-weight: 750; font-size: 1.09rem; }
+#drop-zone span { color: #a18674; }
+#browse-btn {
+  border: 1.5px solid #be7a7b;
+  border-radius: 999px;
+  padding: 11px 24px;
+  background: #bf747b;
+  color: white;
+  font-weight: 800;
+  box-shadow: 0 4px 0 #e6b2a9;
+}
+#browse-btn:hover { background: #a85c64; }
+#docs-list-container { overflow-x: auto; }
+#docs-table { font-size: .91rem; min-width: 560px; }
+#docs-table th {
+  color: #775343;
+  border-color: #eedccc;
+  font-weight: 800;
+  padding: 15px 13px;
+  background: #fff8ed;
+}
+#docs-table td { border-color: #f1e6dc; padding: 16px 13px; color: #62493e; }
+#docs-table tbody tr:hover { background: #fffaf4; }
+.status-cell { color: #537253 !important; font-weight: 650; }
+.remove-btn { color: #ba6871; font-weight: 800; font-size: 1.5rem; }
+.remove-btn:hover { color: #a44751; }
+#empty-state { color: #987d6e; }
+#upload-feedback { font-weight: 650; }
+.feedback-success { color: #537253; }
+.feedback-error { color: #aa4b51; }
+@media (max-width: 720px) {
+  body { padding: 16px 10px 35px; }
+  #app-wrapper { gap: 16px; }
+  .app-header { padding: 27px 118px 26px 22px; min-height: 185px; border-radius: 24px; }
+  .app-header h1 { font-size: clamp(1.55rem, 6.3vw, 2.3rem); }
+  .app-header::after { right: 7px; top: 51px; width: 112px; height: 125px; }
+  .app-header::before { right: 90px; font-size: 31px; }
+  .app-subtitle { font-size: .88rem; }
+  .brand-label { font-size: .64rem; padding: 6px 10px; }
+  .tab-btn { padding: 11px 17px; font-size: .87rem; }
+  #chat-container { height: min(690px, 73vh); min-height: 470px; }
+  #chat-window { padding: 17px 13px; }
+  .message { max-width: 91%; padding: 12px 14px; font-size: .89rem; }
+  .chat-intro { padding: 15px; }
+  .chat-intro-icon { flex-basis: 41px; height: 41px; font-size: 23px; }
+  .chat-intro-text strong { font-size: .93rem; }
+  .chat-intro-text span { font-size: .73rem; }
+  #chat-form { padding: 12px; gap: 8px; }
+  #user-input { padding: 13px; }
+  #send-btn { padding: 10px 13px; }
+  #docs-container { padding: 26px 16px; }
+  #drop-zone { padding: 27px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tab-btn, #drop-zone, #send-btn { transition: none; }
+}
